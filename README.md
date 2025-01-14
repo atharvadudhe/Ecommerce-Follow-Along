@@ -63,3 +63,14 @@ Key learnings -
 - Learned how to use the mongodb database and connect it with our server code.
 - Learned to use jsonWebTokens for authentications.
 - And finally learned to effectively handle the errors.
+
+## Milestone 4: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We learned how to use mongoose schema
+- We learned how to install and use multer
+- We learned password hashing using bcrypt
+- And lastly we learned about usage of jsonWebTokens for authentication.
