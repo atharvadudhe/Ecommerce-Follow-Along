@@ -123,7 +123,7 @@ const Signup = () => {
                             </div>
                         </div>
                         <div>
-                            <button type='submit' className='group relative w-[full] h-[40px] flex justify-centerpy-2 px-4 border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700'>
+                            <button type='submit' className='group relative w-[full] h-[40px] flex justify-centerpy-2 items-center px-4 border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700'>
                                 Submit
                             </button>
                         </div>
