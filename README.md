@@ -99,3 +99,14 @@ Key learnings -
 - We learned to hashe the password.
 - We also learned how to store the user credentials.
 - We also implemented the logic of if the user exists, if user not exists then we have created the user.
+
+****
+
+## Milestone 7: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We learned and created Login Endpoint.
+- We have also created password and email validation.

@@ -6,6 +6,7 @@ const sendToken=(user,statusCode,res)=>{
             Date.now()+90*5215012+8*1000
         ),
         httpOnly: true,
+        sameSite
     }
 
     res.status(statusCode).cookie("token",token, option).json({
