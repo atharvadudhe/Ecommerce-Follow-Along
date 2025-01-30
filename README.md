@@ -130,3 +130,12 @@ Key learnings -
 
 - We Create the form for products.
 - We have also made this form functional such that this form will take multiple product images as input.
+
+## Milestone 10: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have created an endpoint to create a product.
+- We have also configured the multer to upload the multiples images of the product.
