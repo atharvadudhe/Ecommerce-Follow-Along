@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     },
   });
 
-const pstorage = multer.diskStorage({
+const pstorage=multer.diskStorage({
   destination:'products/',
   filename:function(req,file,cb){
     console.log(req.body)
@@ -22,7 +22,7 @@ const pstorage = multer.diskStorage({
     cb(null,filename + "-" + uniqueSuffix + ".png");
   }
 })
-
-// Initialize upload object
+  
+  // Initialize upload object
 exports.upload = multer({ storage: storage });
-exports.pupload = multer({ storage: pstorage });
+exports.pupload=multer({storage:pstorage})
