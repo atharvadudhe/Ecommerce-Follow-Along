@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "hrenikindi",
+  "author": "atharvadudhe",
   "type": "commonjs",
   "main": "backend/server.js",
   "scripts": {
