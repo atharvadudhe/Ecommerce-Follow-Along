@@ -158,7 +158,7 @@ Key learnings -
 - We have created an an endpoint that will send data by filtering with mail's and send data from mongodb.
 - We have also learned how to display that data dynamically using product card created earlier.
 
-## Milestone 12: Project Overview -
+## Milestone 13: Project Overview -
 
 In this milestone we learned the following things -
 
