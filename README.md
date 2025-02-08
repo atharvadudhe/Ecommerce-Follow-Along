@@ -158,11 +158,19 @@ Key learnings -
 - We have created an an endpoint that will send data by filtering with mail's and send data from mongodb.
 - We have also learned how to display that data dynamically using product card created earlier.
 
-## Milestone 12: Project Overview -
+## Milestone 13: Project Overview -
 
 In this milestone we learned the following things -
 
 Key learnings - 
 
-- We have created an an endpoint that will update the existing data in MongoDB.
+- We have created an endpoint that will update the existing data in MongoDB.
 - We have also implemented the logic of auto filling the form with previous data and give option to edit.
+
+## Milestone 14: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have created an endpoint that delete the product with specific ID from MongoDB.
