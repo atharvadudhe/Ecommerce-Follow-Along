@@ -192,3 +192,12 @@ Key learnings -
 
 - We have an product info page that display all the product data.
 - We have also implemented the quantity button and add to card button.
+
+## Milestone 17: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have edited the user schema to store cart products .
+- We have also implemented an end point to receive the product details and store in database.
