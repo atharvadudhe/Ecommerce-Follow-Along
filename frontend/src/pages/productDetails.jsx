@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const email="harshith@gmail.com"
+  const email="atharva@gmail.com"
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -37,7 +37,7 @@ const ProductDetails = () => {
 }, [product]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => setQuantity((prev) => (prev >= 1 ? prev - 1 : 1));
+  const handleDecrement = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const addtocart = async () => {
     try {
