@@ -210,3 +210,13 @@ Key learnings -
 
 - We have create an endpoint to receive request from cart page.
 - We have also create an backend endpoint to fetch all the products inside cart with user mail.
+
+## Milestone 19: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have create an cart page that display the products inside cart using endpoint we build in milestone 18.
+- We have also implemented the logic for each product where an add option is made available to increase and decrease quantity using + and - buttons.
+- We have also created an endpoint to increase and decrease the quantity

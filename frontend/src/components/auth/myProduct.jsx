@@ -1,5 +1,5 @@
-
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
@@ -68,7 +68,12 @@ const Myproduct=({_id,name,images,description,price})=>{
     );
 }
 
+Myproduct.propTypes={
+    _id:PropTypes.string.isRequired,
+    name:PropTypes.string.isRequired,
+    images:PropTypes.arrayOf(PropTypes.string).isRequired,
+    description:PropTypes.string.isRequired,
+    price:PropTypes.number.isRequired
+}
 
 export default Myproduct;
-
-
