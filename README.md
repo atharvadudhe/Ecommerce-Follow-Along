@@ -230,3 +230,13 @@ Key learnings -
 - We have create an Backend endpoint that will sent user data.
 - Also create frontend profile page that will display profile photo, name and email in one section. If there are no address display "No address found"y
 - In another section we have displayed address and added an button called "Add address".
+
+## Milestone 21: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have create address form in frontend page.
+- We have also create an state that will store input address
+- We have also impmented the logic where we click on add address in profile it should navigate to this form page.
