@@ -240,3 +240,13 @@ Key learnings -
 - We have create address form in frontend page.
 - We have also create an state that will store input address
 - We have also impmented the logic where we click on add address in profile it should navigate to this form page.
+
+## Milestone 22: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have create an endpoint that will receive the address from address form in frontend.
+- We have also added the address to the address array inside user collection.
+

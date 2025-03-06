@@ -121,7 +121,7 @@ export default function Profile() {
 								</div>
 							) : null}
 							{addresses.map((address, index) => (
-								<AddressCard key={index} {...address} />
+								<AddressCart key={index} {...address} />
 							))}
 						</div>
 					</div>
