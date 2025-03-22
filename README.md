@@ -270,3 +270,11 @@ Key learnings -
 - Then we have displayed the address user selected for delivery.
 - We have also displayed the total value of the cart.
 - We have also place an order button at the bottom.
+
+## Milestone 25: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have create an endpoint that will receive the products, user, address details.
