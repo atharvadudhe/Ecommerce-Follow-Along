@@ -259,3 +259,14 @@ Key learnings -
 - We have create an placeorder button inside cart page and navigate to select address page when clicked.
 - We have also create and select address page that will display all the available address and have an option to select one address.
 - Created an backend endpoint that will send all the addresses of the user.
+
+## Milestone 24: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have created and displayed all the products we are ordering.
+- Then we have displayed the address user selected for delivery.
+- We have also displayed the total value of the cart.
+- We have also place an order button at the bottom.
