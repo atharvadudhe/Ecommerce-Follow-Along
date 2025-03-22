@@ -278,3 +278,11 @@ In this milestone we learned the following things -
 Key learnings - 
 
 - We have create an endpoint that will receive the products, user, address details.
+
+## Milestone 26: Project Overview -
+
+In this milestone we learned the following things -
+
+Key learnings - 
+
+- We have create an endpoint that will receive the user mail.
