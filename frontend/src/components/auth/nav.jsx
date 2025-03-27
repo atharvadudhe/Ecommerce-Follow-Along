@@ -53,7 +53,8 @@ const NavBar = () => {
               { name: "My Products", path: "/my-products" },
               { name: "Add Products", path: "/create-product" },
               { name: "Cart", path: "/cart" },
-              { name: "Profile", path: "/profile"}
+              { name: "Profile", path: "/profile"},
+              { name: "My Orders", path: "/myorders" }
             ].map((link) => (
               <li key={link.path}>
                 <NavLink
