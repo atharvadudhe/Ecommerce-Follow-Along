@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Myproduct from "../components/auth/myProduct";
-import NavBar from "../components/auth/nav";
+import MyProduct from "../components/auth/myProduct";
+import NavBar from '../components/auth/nav';
+import { useSelector } from 'react-redux'; //import useSelector
+
+
 
 export default function MyProducts() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const email = "atharva@gmail.com"; //mail which is present in mongodb
+    const email = useSelector((state) => state.user.email)
 
     useEffect(() => {
+        if (!email) return alert("Error in Display!");
         fetch(`http://localhost:8000/api/v2/product/my-products?email=${email}`)
             .then((res) => {
                 if (!res.ok) {
@@ -42,10 +46,10 @@ export default function MyProducts() {
             <h1 className="text-3xl text-center text-white py-6">My products</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
                 {products.map((product) => (
-                    <Myproduct key={product._id} {...product} />
+                    <MyProduct key={product._id} {...product} />
                 ))}
             </div>
         </div>
-        </>
+    </>
     );
 }
