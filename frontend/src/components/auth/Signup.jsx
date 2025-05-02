@@ -2,13 +2,14 @@ import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
-import axios from "axios";
-import ValidationFormObject from "../../../validation";
+import axios from "../../axiosConfig";
+import ValidationFormObject from "../../validation";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [number,SetNumber]=useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const [errors, setErrors] = useState({}); 
@@ -48,6 +49,7 @@ const Signup = () => {
     newForm.append("name", name);
     newForm.append("email", email);
     newForm.append("password", password);
+    newForm.append("phoneNumber", number);
 
     const config = {
       headers: {
@@ -58,7 +60,7 @@ const Signup = () => {
 
 
 //axios request
-    axios.post("http://localhost:8000/api/v2/user/create-user", newForm, config).then((res)=>{
+    axios.post("/api/v2/user/create-user", newForm, config).then((res)=>{
       console.log(res.data);
     }).catch((err)=>{
       console.log(err);
@@ -157,6 +159,25 @@ const Signup = () => {
                 {errors.password && (
                   <p className="text-red-500 text-xs mt-1">{errors.password}</p>
                 )}
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="number"
+                className="block text-sm font-medium text-gray-700"
+              >
+               Phone Number
+              </label>
+              <div className="mt-1">
+                <input
+                  type="number"
+                  name="phoneNumber"
+                  autoComplete="number"
+                  value={number}
+                  onChange={(e) => SetNumber(e.target.value)}
+                  className={`appearance-none block w-full px-3 py-2 border`}
+                />
               </div>
             </div>
 

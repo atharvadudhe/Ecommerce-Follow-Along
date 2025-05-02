@@ -1,47 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "../../axiosConfig";
 
-const Myproduct=({_id,name,images,description,price})=>{
-    const[currentIndex,setCurrentIndex]=useState(0)
-    const navigate=useNavigate();
+function Myproduct({ _id, name, images, description, price, onDelete }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
-    useEffect(()=>{
-        if(!images||images.length ===0) return "No Images";
-        const interval=setInterval(() => {
-            setCurrentIndex((prevIndex)=>(prevIndex+1)%images.length)
-            
-        },2000);
-        return ()=>clearInterval(interval)
-    },[images])
+    useEffect(() => {
+        if (!images || images.length === 0) return;
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [images]);
 
-    const handleEdit=()=>{
-        navigate(`/create-product/${_id}`)
-    }
+    const currentImage = Array.isArray(images) && images.length > 0
+        ? images[currentIndex]
+        : null;
 
-    const handleDelete=async ()=>{
-        try{
-            const response=await axios.delete(`http://localhost:8000/api/v2/product/delete-product/${_id}`);
-            if(response.status===200){
-                alert("Product Deleted");
-                window.location.reload();
+    const handleEdit = () => {
+        navigate(`/create-product/${_id}`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            const response = await axios.delete(`/api/v2/product/delete-product/${_id}`);
+            if (response.status === 200) {
+                alert("Product deleted successfully!");
+                onDelete(_id); // ✅ call parent handler to update state
             }
-        }catch(err){
-            console.error(`Error deleting product:${err}`);
-            alert("Falied to delete the product")
+        } catch (err) {
+            console.error("Error deleting product:", err);
+            alert("Failed to delete product.");
         }
-
-    }
-
-    const currentImage = images && images.length > 0 ? images[currentIndex] : null;
+    };
 
     return (
         <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
             <div className="w-full">
                 {currentImage && (
                     <img
-                        src={`http://localhost:8000${currentImage}`}
+                        src={`${axios.defaults.baseURL}${currentImage}`}
                         alt={name}
                         className="w-full h-56 object-cover rounded-lg mb-2"
                     />
@@ -58,7 +58,7 @@ const Myproduct=({_id,name,images,description,price})=>{
                     Edit
                 </button>
                 <button
-                    className="w-full text-white px-4 py-2 rounded-md bg-red-500 hover:bg-red-400 transition duration-300"
+                    className="w-full text-white px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 transition duration-300 mt-2"
                     onClick={handleDelete}
                 >
                     Delete
@@ -68,12 +68,13 @@ const Myproduct=({_id,name,images,description,price})=>{
     );
 }
 
-Myproduct.propTypes={
-    _id:PropTypes.string.isRequired,
-    name:PropTypes.string.isRequired,
-    images:PropTypes.arrayOf(PropTypes.string).isRequired,
-    description:PropTypes.string.isRequired,
-    price:PropTypes.number.isRequired
-}
+Myproduct.propTypes = {
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired, // ✅ required prop
+};
 
 export default Myproduct;

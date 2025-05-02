@@ -345,3 +345,12 @@ Key learning -
 - Using sign method to create an JWT token with mail and ID
 - Returning maxAge to set expire time
 - Added the cookie inside the response that helps in storing the cookie inside browser.
+
+## Milestone 34: Project Overview - 
+
+In this milestone we learned the following things - 
+
+Key learning - 
+
+- We have extract the JWT token from the cookie and send it to the server.
+- Also implemnted the logic to validate the JWT token received from the client.

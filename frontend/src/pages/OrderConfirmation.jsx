@@ -1,71 +1,80 @@
-
-// OrderConfirmation.jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Nav from '../components/auth/nav';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from '../axiosConfig';
+import Nav from "../components/auth/nav";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // 1) Import PayPalScriptProvider & PayPalButtons
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
-
-
 const OrderConfirmation = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const { addressId, email } = location.state || {};
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { addressId, email } = location.state || {};
 
-    const [selectedAddress, setSelectedAddress] = useState(null);
-    const [cartItems, setCartItems] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [orderDetails, setOrderDetails] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [orderDetails, setOrderDetails] = useState(null);
+  // 2) Track which payment method is selected
+  const [paymentMethod, setPaymentMethod] = useState("cod"); // 'cod' or 'paypal'
+  useEffect(() => {
+    if (!addressId || !email) {
+      navigate("/select-address");
+      return;
+    }
 
-    // 2) Track which payment method is selected
-    const [paymentMethod, setPaymentMethod] = useState("cod"); // 'cod' or 'paypal'
-    
+    const fetchData = async () => {
+      try {
+        const [addressResponse, cartResponse] = await Promise.all([
+          axios.get("/api/v2/user/addresses", {
+            params: { email },
+          }),
+          axios.get("/api/v2/product/cartproducts", {
+            params: { email },
+          }),
+        ]);
 
-    useEffect(() => {
-        if (!addressId || !email) {
-            navigate('/select-address');
-            return;
-        }
+        const address = addressResponse.data.addresses.find(
+          (addr) => addr._id === addressId
+        );
+        setSelectedAddress(address || {});
 
-        const fetchData = async () => {
-            try {
-                const [addressResponse, cartResponse] = await Promise.all([
-                    axios.get('http://localhost:8000/api/v2/user/addresses', { params: { email } }),
-                    axios.get('http://localhost:8000/api/v2/product/cartproducts', { params: { email } })
-                ]);
+        const processedCartItems = cartResponse.data.cart.map((item) => ({
+          _id: item.productId._id,
+          name: item.productId.name,
+          price: item.productId.price,
+          images: item.productId.images.map(
+            (imagePath) => `${axios.defaults.baseURL}${imagePath}`
+          ),
+          quantity: item.quantity,
+        }));
+        setCartItems(processedCartItems);
+        setTotalPrice(
+          processedCartItems.reduce(
+            (acc, item) => acc + item.price * item.quantity,
+            0
+          )
+        );
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            err.message ||
+            "An unexpected error occurred."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [addressId, email, navigate]);
 
-                const address = addressResponse.data.addresses.find(addr => addr._id === addressId);
-                setSelectedAddress(address || {});
-
-                const processedCartItems = cartResponse.data.cart.map(item => ({
-                    _id: item.productId._id,
-                    name: item.productId.name,
-                    price: item.productId.price,
-                    images: item.productId.images.map(imagePath => `http://localhost:8000${imagePath}`),
-                    quantity: item.quantity,
-                }));
-                setCartItems(processedCartItems);
-                setTotalPrice(processedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
-            } catch (err) {
-                setError(err.response?.data?.message || err.message || 'An unexpected error occurred.');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, [addressId, email, navigate]);
-
-// 3) Single function to place order, can accept PayPal data if payment was online
-const handlePlaceOrder = async (
+  // 3) Single function to place order, can accept PayPal data if payment was online
+  const handlePlaceOrder = async (
     paymentType = "cod",
     paypalOrderData = null
   ) => {
-    try { 
+    try {
       // Prepare order items
       const orderItems = cartItems.map((item) => ({
         product: item._id,
@@ -94,7 +103,7 @@ const handlePlaceOrder = async (
       };
 
       const response = await axios.post(
-        "http://localhost:8000/api/v2/orders/place-order",
+        "/api/v2/orders/place-order",
         payload
       );
       setOrderDetails(response.data.orders);
@@ -103,7 +112,11 @@ const handlePlaceOrder = async (
     }
   };
 
-   //4)Error and loading state were not handled in previous ones so include here
+  const closePopup = () => {
+    navigate("/myorders");
+  };
+
+  //4)Error and loading state were not handled in previous ones so include here
 
   if (loading) {
     return (
@@ -126,11 +139,6 @@ const handlePlaceOrder = async (
       </div>
     );
   }
-
-    const closePopup = () => {
-        navigate('/myorders');
-    };
-
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-purple-100 to-blue-200">
@@ -208,8 +216,7 @@ const handlePlaceOrder = async (
                 <div className="mt-4" style={{ maxWidth: "500px" }}>
                   <PayPalScriptProvider
                     options={{
-                      "client-id":
-                        "AVAdo3rCsIxxILR9WLeYX0heYxNarhcr1bNDNepOkBV14B2d45nvkKMS_yi5vOgT_-nCQSrsN8hWzeJt",
+                      "client-id": "AaKL1vZqsVTYSxBUpCXr0qjgiyErrkNKwdW30Gdz9UZGS64lwJ6dDtVU6Ic6i5hcIv_YVNIjO7FZu5dV",
                     }}
                   >
                     <PayPalButtons
@@ -287,7 +294,6 @@ const handlePlaceOrder = async (
       </div>
     </div>
   );
-
 };
 
-export default OrderConfirmation;
+export default OrderConfirmation; 
