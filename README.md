@@ -354,3 +354,19 @@ Key learning -
 
 - We have extract the JWT token from the cookie and send it to the server.
 - Also implemnted the logic to validate the JWT token received from the client.
+
+## Milestone 34: Project Overview - 
+
+In this milestone we learned the following things - 
+
+Key learning - 
+
+- We have deployed our backend on render.
+- We have also replaced the localhost in frontend with the backend deployment link.
+- We have also deployed the frontend on netlify.
+
+## Backend Link
+https://ecommerce-follow-along-wam5.onrender.com
+
+## Frontend Link
+https://ecommerce-follow-along.netlify.app/
