@@ -18,6 +18,12 @@ app.use(cors({
     credentials: true  // Allow credentials (cookies, authorization headers, etc.)
 }));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://ecommerce-follow-along.netlify.app");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //config
 if(process.env.NODE_ENV !== "PRODUCTION"){
     require('dotenv').config({
